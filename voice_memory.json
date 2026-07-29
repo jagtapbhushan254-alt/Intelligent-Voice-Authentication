@@ -1,0 +1,89 @@
+{
+  "test_user_123": {
+    "name": {
+      "key": "name",
+      "value": "John",
+      "category": "personal",
+      "confidence": 0.9,
+      "created_at": "2026-01-16T23:12:12.471508",
+      "last_accessed": "2026-01-16T23:15:17.088083",
+      "access_count": 4
+    },
+    "relationship_name": {
+      "key": "relationship_name",
+      "value": "John",
+      "category": "relationship",
+      "confidence": 0.8,
+      "created_at": "2026-01-16T23:12:12.473523",
+      "last_accessed": "2026-01-16T23:15:17.091093",
+      "access_count": 4
+    },
+    "birthday": {
+      "key": "birthday",
+      "value": "january 15",
+      "category": "personal",
+      "confidence": 0.9,
+      "created_at": "2026-01-16T23:12:12.475559",
+      "last_accessed": "2026-01-16T23:15:17.092092",
+      "access_count": 4
+    },
+    "likes": {
+      "key": "likes",
+      "value": "pizza",
+      "category": "preference",
+      "confidence": 0.7,
+      "created_at": "2026-01-16T23:12:12.475559",
+      "last_accessed": "2026-01-16T23:15:17.093091",
+      "access_count": 4
+    },
+    "location": {
+      "key": "location",
+      "value": "san francisco",
+      "category": "personal",
+      "confidence": 0.9,
+      "created_at": "2026-01-16T23:12:12.476544",
+      "last_accessed": "2026-01-16T23:15:17.094543",
+      "access_count": 4
+    }
+  },
+  "integration_test_user": {
+    "name": {
+      "key": "name",
+      "value": "Alice",
+      "category": "personal",
+      "confidence": 0.9,
+      "created_at": "2026-01-16T23:12:12.496662",
+      "last_accessed": "2026-01-16T23:15:17.135923",
+      "access_count": 4
+    },
+    "likes": {
+      "key": "likes",
+      "value": "music",
+      "category": "preference",
+      "confidence": 0.7,
+      "created_at": "2026-01-16T23:12:12.496662",
+      "last_accessed": "2026-01-16T23:15:17.136925",
+      "access_count": 4
+    },
+    "relationship_name": {
+      "key": "relationship_name",
+      "value": "Alice",
+      "category": "relationship",
+      "confidence": 0.8,
+      "created_at": "2026-01-16T23:12:12.497688",
+      "last_accessed": "2026-01-16T23:15:17.138925",
+      "access_count": 4
+    }
+  },
+  "51": {
+    "name": {
+      "key": "name",
+      "value": "Sorry",
+      "category": "personal",
+      "confidence": 0.9,
+      "created_at": "2026-03-18T12:09:45.852817",
+      "last_accessed": "2026-03-18T12:09:45.852817",
+      "access_count": 1
+    }
+  }
+}
