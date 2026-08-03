@@ -1,7 +1,7 @@
 # SecureX-Assist 🔐
 
 > **Multi-Modal Biometric Authentication & AI Voice Assistant for Secure Desktop Operations**  
-> Published · ICASET-2026 | Pillai HOC College of Engineering & Technology, Mumbai University
+> Accepted for publication at ICASET 2026 | Pillai HOC College of Engineering & Technology, Mumbai University
 
 ---
 
@@ -184,7 +184,7 @@ SecureX-Assist/
 
 ### 1. Clone the repository
 ```bash
-git clone https://github.com/yourusername/SecureX-Assist.git
+git clone https://github.com/jagtapbhushan254-alt/SecureX-Assist.git
 cd SecureX-Assist
 ```
 
