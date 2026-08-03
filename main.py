@@ -27,7 +27,7 @@ def main():
     load_environment()
     
     # Load configuration
-    config = load_config()
+    config = load_config("config/config.yaml")
     
     # Setup logging
     log_level = config.get('app', {}).get('log_level', 'INFO')

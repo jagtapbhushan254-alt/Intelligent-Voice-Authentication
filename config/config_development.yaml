@@ -1,0 +1,189 @@
+# SecureX-Assist Development Configuration
+# USE THIS FOR TESTING AND DEBUGGING ONLY
+# More lenient thresholds, faster testing
+
+app:
+  name: "SecureX-Assist"
+  version: "1.0.0-dev"
+  theme: "sci-fi"
+  log_level: "DEBUG"
+
+system:
+  # DEVELOPMENT MODE - Lenient for testing
+  development_mode: true
+  bypass_anti_spoofing: false  # Keep anti-spoofing enabled for realistic testing
+  bypass_anti_spoofing_verify: false  # Still verify during authentication
+  spoof_confidence_min: 0.70
+  spoof_confidence_min_verify: 0.55
+  adaptive_threshold: true
+  min_security_confidence: 0.3  # Lower threshold for testing
+  quiet_environment_adaptation: true
+  force_anti_spoof_fallback: false
+  voice_threshold: 0.50  # More forgiving for testing
+  base_voice_threshold: 0.40
+  voice_update_learning: true
+  session_timeout: 3600
+  max_login_attempts: 5  # More attempts for testing
+  require_liveness: true
+  multi_factor: true
+  enrollment_samples: 3
+  min_match_samples: 2
+  
+  # Anti-spoofing - Enabled but lenient
+  enable_anti_spoofing: true
+  enable_liveness_check: true
+  enable_noise_normalization: true
+  anti_spoof_mode: "advanced"
+  anti_spoof_timeout_seconds: 3.5
+  anti_spoof_max_audio_seconds: 2
+  anti_spoof_fail_open: false
+  calibrated_spoof_secondary_confidence_min: 0.50
+  replay_live_min: 0.20
+  liveness_live_min: 0.50
+  quality_genuine_min: 0.40
+  cosine_verify_threshold: 0.52
+  allow_borderline_voice_match: false
+  borderline_min_cosine: 0.50
+  borderline_min_confidence: 0.70
+  borderline_min_quality: 0.70
+  liveness_gate_min: 0.60
+  anti_spoof_gate_min: 0.50
+  # Voice quality hardening (noise robustness)
+  min_voice_quality_score: 0.25
+  min_snr_db: 5.0
+  max_clipping_ratio: 0.02
+  min_verify_audio_seconds: 0.6
+  enable_denoise_for_embedding: true
+  denoise_strength: 0.30
+  require_face_verification_on_login: true
+  require_face_enrollment: true
+  # Voice assistant: Whisper on CPU can take >12s on first run.
+  assistant_stt_timeout_seconds: 60
+  assistant_command_timeout_seconds: 60
+  intent_confidence_threshold: 0.60
+  groq_model: "llama-3.1-8b-instant"
+  llm_timeout_seconds: 10
+
+audio:
+  sample_rate: 16000
+  channels: 1
+  chunk_size: 1024
+  recording_duration: 6
+  min_speech_duration: 0.5
+  min_audio_energy: 0.001
+  vad_aggressiveness: 0
+  assistant_max_silence_duration: 0.9
+  assistant_padding_duration: 0.15
+
+augmentation:
+  pitch_shift: [-3, 3]
+  gain_db: [-6, 6]
+  speed_factor: [0.95, 1.05]
+  noise_level: 0.01
+
+tts:
+  enabled: true
+  model_path: "models/piper/en_US-lessac-medium.onnx"
+  voice: female
+  rate: 1.0
+  volume: 0.9
+  rate_wpm: 170
+  short_mode: true
+  default_blocking: false
+
+models:
+  primary_embedding: "pyannote/embedding"
+  fallback_embedding: "speechbrain/spkrec-ecapa-voxceleb"
+  vad_model: "silero-vad"
+  stt_model: "small"  # Whisper model (base/small/medium/large)
+
+database:
+  path: "securex_db.sqlite"
+  backup_enabled: true
+
+security_alerts:
+  window_seconds: 120
+  soft_threshold: 1
+  active_threshold: 3
+  hard_threshold: 5
+  active_cooldown_seconds: 30
+  hard_cooldown_seconds: 120
+  enable_workstation_lock: false
+
+ui:
+  window_width: 1000
+  window_height: 700
+  theme_color: "#00ff41"
+  animation_speed: 300
+
+# Development security settings
+security:
+  base_voice_threshold: 0.40
+  spoof_confidence_min: 0.70
+  spoof_confidence_min_verify: 0.55
+  adaptive_threshold: true
+  voice_update_learning: true
+  min_match_samples: 2
+  force_anti_spoof_fallback: false
+  anti_spoof_timeout_seconds: 3.5
+  anti_spoof_max_audio_seconds: 2
+  fast_mode: false
+  anti_spoof_fail_open: false
+  calibrated_spoof_secondary_confidence_min: 0.50
+  replay_live_min: 0.20
+  liveness_live_min: 0.50
+  quality_genuine_min: 0.40
+  cosine_verify_threshold: 0.52
+  allow_borderline_voice_match: false
+  borderline_min_cosine: 0.50
+  borderline_min_confidence: 0.70
+  borderline_min_quality: 0.70
+  liveness_gate_min: 0.60
+  anti_spoof_gate_min: 0.50
+  require_face_verification_on_login: true
+  require_face_enrollment: true
+  
+  # Security hardening (Phase 5) - Lenient for development
+  enable_encryption: false  # Disable encryption for faster testing
+  encryption_key_file: ".encryption_key.dev"  # Dev encryption key
+  enable_audit_logging: true  # Still log for debugging
+  max_failed_attempts: 10  # More lenient for testing
+  lockout_duration_minutes: 5  # Shorter lockout
+  rate_limit_window_seconds: 60
+  max_requests_per_window: 20  # More requests allowed
+  enable_attack_detection: false  # Disable for dev
+  session_token_expiry_hours: 48  # Longer sessions
+  require_ip_consistency: false
+
+# Multi-modal fusion settings
+fusion:
+  enabled: true
+  strategy: "weighted_sum"  # weighted_sum, adaptive, or conservative
+  threshold: 0.60  # Lower threshold for testing
+  voice_weight: 0.35
+  face_weight: 0.30
+  voice_liveness_weight: 0.15
+  face_liveness_weight: 0.15
+  anti_spoof_weight: 0.05
+
+# Real-time streaming verification (Phase 3)
+streaming:
+  enabled: true  # Enable streaming for faster testing
+  chunk_duration_seconds: 0.5  # Smaller chunks for faster feedback
+  min_confidence: 0.65  # Lower threshold for development
+  early_stop_enabled: true  # Test early stopping
+  early_stop_threshold: 0.80  # Lower threshold for dev
+  min_chunks: 2  # Fewer chunks required in dev
+
+# Performance optimization (Phase 8)
+performance:
+  optimization_enabled: true  # Enable performance optimizations
+  warmup_models_on_startup: true  # Warm up models at startup
+  enable_embedding_cache: true  # Cache embeddings
+  cache_size: 50  # Smaller cache for development
+  enable_memory_monitoring: true  # Monitor memory
+  enable_performance_logging: true  # Log performance
+  gc_frequency: 5  # More frequent GC in dev
+  target_inference_time: 1.0  # Target < 1s per verification
+  progressive_updates: true  # Show confidence building
+  update_interval_ms: 250  # Faster updates for development

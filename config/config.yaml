@@ -1,0 +1,146 @@
+# SecureX-Assist Configuration
+
+app:
+  name: "SecureX-Assist"
+  version: "2.0.0"  # Updated version with extraordinary features!
+  theme: "sci-fi"
+  
+  # NEW: Performance & Personalization Features
+  turbo_mode: true  # Enable 4-8x faster processing
+  personalization: true  # Learn user preferences
+  interactive_guide: true  # Show user guide and help
+  smart_suggestions: true  # Proactive assistance
+
+system:
+  development_mode: true  # Enable for easier testing (disables some security features)
+  bypass_anti_spoofing: false  # Keep anti-spoofing enabled
+  bypass_anti_spoofing_verify: false  # Verification still uses anti-spoofing
+  spoof_confidence_min: 0.70
+  spoof_confidence_min_verify: 0.55
+  adaptive_threshold: true  # Ensure adaptive threshold is enabled
+  min_security_confidence: 0.3  # Lowered for fewer false positives
+  quiet_environment_adaptation: true  # Keep adaptation enabled
+  force_anti_spoof_fallback: false
+  voice_threshold: 0.50  # Cosine distance threshold - Lower = stricter (0.25=75% match), Higher = more forgiving (0.50=50% match)
+  base_voice_threshold: 0.40  # Base cosine distance threshold for adaptive system
+  voice_update_learning: true  # Enable post-verification embedding updates
+  session_timeout: 3600  # seconds
+  max_login_attempts: 3
+  require_liveness: true
+  multi_factor: true
+  enrollment_samples: 3  # Number of voice samples during enrollment
+  min_match_samples: 2   # Minimum samples that must match (2 = majority required)
+  
+  # Anti-spoofing settings (SOTA - Advanced Detection)
+  enable_anti_spoofing: true  # ENABLED - Using ADVANCED AASIST-based detection
+  enable_liveness_check: true  # Enable voice liveness detection
+  enable_noise_normalization: true  # Normalize audio across environments
+  anti_spoof_mode: "advanced"  # "basic" or "advanced" (SOTA models)
+  anti_spoof_timeout_seconds: 3.5
+  anti_spoof_max_audio_seconds: 2
+  anti_spoof_fail_open: false
+  calibrated_spoof_secondary_confidence_min: 0.50
+  replay_live_min: 0.20
+  liveness_live_min: 0.50
+  quality_genuine_min: 0.40
+  cosine_verify_threshold: 0.52  # Primary voice match gate (lowered from 0.58 for better UX while maintaining security)
+  allow_borderline_voice_match: false
+  borderline_min_cosine: 0.50
+  borderline_min_confidence: 0.70
+  borderline_min_quality: 0.70
+  fusion_threshold_voice_only: 0.54  # Used when no face frame is available
+  liveness_gate_min: 0.60
+  anti_spoof_gate_min: 0.50
+  # Voice quality hardening (noise robustness)
+  min_voice_quality_score: 0.25
+  min_snr_db: 6.0
+  max_clipping_ratio: 0.015
+  min_verify_audio_seconds: 0.8
+  enable_denoise_for_embedding: true
+  denoise_strength: 0.35
+  require_face_verification_on_login: true
+  require_face_enrollment: true
+  # Voice assistant: Whisper on CPU can take >12s on first run.
+  assistant_stt_timeout_seconds: 60
+  assistant_command_timeout_seconds: 60
+
+audio:
+  sample_rate: 16000
+  channels: 1
+  chunk_size: 1024
+  recording_duration: 6  # seconds - Increased for better voice capture
+  min_speech_duration: 0.5  # seconds - Minimum continuous speech (LOWERED from 0.8 to accept very short phrases)
+  min_audio_energy: 0.001  # Minimum energy level to detect speech (VERY sensitive for distant voices)
+  vad_aggressiveness: 0  # WebRTC VAD aggressiveness (0=least, 3=most aggressive) - MOST SENSITIVE
+  assistant_max_silence_duration: 0.9  # seconds - stop one-shot capture after short silence
+  assistant_padding_duration: 0.15  # seconds - prepend a small pad for cleaner transcript starts
+
+augmentation:
+  pitch_shift: [-3, 3]  # ±3% pitch shift in semitones
+  gain_db: [-6, 6]  # ±6 dB gain variation
+  speed_factor: [0.95, 1.05]  # ±5% speed variation
+  noise_level: 0.01  # Background noise addition level
+
+tts:
+  enabled: true
+  model_path: "models/piper/en_US-lessac-medium.onnx"
+  # Optional: choose preferred voice for the *system* fallback TTS (Windows SAPI/pyttsx3).
+  # Values: default | female | male
+  voice: female
+  # Optional: use a different Piper model for gendered voices.
+  # (Piper voice characteristics depend on the model you load.)
+  # model_path_female: "models/piper/<female-voice-model>.onnx"
+  # model_path_male: "models/piper/<male-voice-model>.onnx"
+  rate: 1.0
+  volume: 0.9
+  # Crisp TTS (avoid delaying auth/commands)
+  rate_wpm: 170
+  short_mode: true
+  default_blocking: false
+
+models:
+  primary_embedding: "pyannote/embedding"
+  fallback_embedding: "speechbrain/spkrec-ecapa-voxceleb"
+  vad_model: "silero-vad"
+  stt_model: "vosk-model-small-en-in-0.4"
+
+database:
+  path: "data/securex_db.sqlite"
+  backup_enabled: true
+
+security_alerts:
+  window_seconds: 120
+  soft_threshold: 1
+  active_threshold: 3
+  hard_threshold: 5
+  active_cooldown_seconds: 30
+  hard_cooldown_seconds: 120
+  enable_workstation_lock: false
+
+command_policy:
+  medium_reauth_seconds: 180
+  high_reauth_seconds: 60
+  medium_min_trust: 0.45
+  high_min_trust: 0.70
+  trust_decay_per_minute: 0.02
+  trust_success_boost: 0.05
+  trust_voice_fail_penalty: 0.15
+  trust_denial_penalty: 0.05
+  intent_risk_levels:
+    system_shutdown: high
+    system_restart: high
+    delete_file: high
+    send_secure_message: high
+    system_lock: high
+    lock_system: high
+    run_security_scan: medium
+    show_logs: medium
+    start_voice_call: medium
+    open_app: medium
+    close_app: medium
+
+ui:
+  window_width: 1000
+  window_height: 700
+  theme_color: "#00ff41"  # Matrix green
+  animation_speed: 300  # milliseconds
