@@ -1,71 +1,49 @@
-# ===========================
-# Environment
-# ===========================
-.env
+# -----------------------------
+# Python
+# -----------------------------
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual Environment
 .venv/
 venv/
 env/
-ENV/
 
-# ===========================
-# Python
-# ===========================
-__pycache__/
-*.py[cod]
-*$py.class
-*.so
-.Python
+# Environment Variables
+.env
+.env.*
 
-# ===========================
+# IDE
+.vscode/
+.idea/
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
 # Database
-# ===========================
-*.db
 *.sqlite
 *.sqlite3
 
-# ===========================
-# Logs
-# ===========================
-*.log
-logs/
+# Runtime / Generated Data
+data/*
+!data/.gitkeep
 
-# ===========================
-# Temporary Audio
-# ===========================
-temp_audio/
-*.wav
-*.mp3
-*.flac
+temp_audio/*
+!temp_audio/.gitkeep
 
-# ===========================
-# AI Models
-# ===========================
-*.onnx
-*.onnx.json
-vosk-model-en-in-0.5/
-vosk-model-small-en-us-0.15/
-models/piper/
-models/speechbrain/
+# Model Cache (optional)
+models/*.onnx
 
-# ===========================
-# Cache
-# ===========================
-cache/
-.cache/
-.pytest_cache/
-.coverage
-htmlcov/
+# Build
+dist/
+build/
+*.egg-info/
 
-# ===========================
-# IDE
-# ===========================
-.vscode/
-.idea/
-*.swp
-*.swo
-
-# ===========================
-# OS
-# ===========================
-.DS_Store
-Thumbs.db
+# Jupyter
+.ipynb_checkpoints/
