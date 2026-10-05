@@ -16,7 +16,7 @@
 
 ## 📌 What is SecureX-Assist??
 
-**Secure-X Assist** is a research-grade, production-ready multi-modal authentication framework that solves a fundamental problem: *existing desktop authentication is either secure or usable — rarely both.*
+**SecureX-Assist** is a research-oriented multi-modal authentication framework that combines biometric verification, liveness detection, and an AI voice assistant for secure desktop operations.
 
 It unifies three security layers into one real-time pipeline:
 
@@ -28,7 +28,7 @@ It unifies three security layers into one real-time pipeline:
 | Fusion Engine | Adaptive score-level fusion | Final auth decision: 98.75% accuracy |
 | Voice Assistant | Whisper STT + TF-IDF intent classifier | Hands-free secure desktop commands |
 
-Unlike traditional systems that only authenticate at login, **Secure-X Assist continuously re-authenticates throughout the session** — making it the first desktop framework to combine passive biometric monitoring with active AI-driven voice control.
+Unlike traditional systems that primarily authenticate at login, **SecureX-Assist combines continuous biometric monitoring with AI-driven voice control** for secure desktop operations.
 
 ---
 
@@ -55,9 +55,9 @@ Unlike traditional systems that only authenticate at login, **Secure-X Assist co
 |---|---|---|
 | ![login](screenshots/login_screen.png) | ![voice](screenshots/voice_auth.png) | ![fusion](screenshots/fusion_result.png) |
 
-| System Dashboard | Voice Command Execution | 
-|---|---|---|
-| ![dashboard](screenshots/dashboard.png) | ![command](screenshots/voice_command.png) |
+| **System Dashboard** | **Voice Command Execution** |
+| -------------------- | --------------------------- |
+| ![Dashboard](screenshots/dashboard.png) | ![Voice Command](screenshots/voice_command.png) |
 
 ---
 
@@ -152,13 +152,12 @@ where α, β, γ are adaptive weights tuned on validation data. The weighted com
 
 ## 📁 Repository Structure
 
-```
-SecureX-Assist/
+```text
+Intelligent-Voice-Authentication/
 │
 ├── api/
 ├── config/
 ├── core/
-├── data/
 ├── models/
 ├── screenshots/
 ├── scripts/
@@ -169,30 +168,35 @@ SecureX-Assist/
 ├── requirements.txt
 ├── README.md
 ├── .gitignore
-├── .env.example
-└── LICENSE
+└── .env.example
 
----
+```
 
 ## ⚙️ Installation & Setup
 
 ### Prerequisites
+
 - Python 3.10+
 - CUDA-compatible GPU (recommended) or CPU fallback
 - Webcam + Microphone
 - 8GB RAM minimum
 
 ### 1. Clone the repository
+
 ```bash
-git clone https://github.com/jagtapbhushan254-alt/SecureX-Assist.git
-cd SecureX-Assist
+git clone https://github.com/jagtapbhushan254-alt/Intelligent-Voice-Authentication.git
+cd Intelligent-Voice-Authentication
 ```
 
 ### 2. Create virtual environment
 ```bash
 python -m venv venv
-source venv/bin/activate        # Linux/macOS
-venv\Scripts\activate           # Windows
+
+# Linux/macOS
+source venv/bin/activate
+
+# Windows
+venv\Scripts\activate
 ```
 
 ### 3. Install dependencies
@@ -212,18 +216,10 @@ cp .env.example .env
 # Edit .env with your settings (DB path, model paths, thresholds)
 ```
 
-### 6. Initialize database
-```bash
-python src/database/db_manager.py --init
-```
-
-### 7. Launch intelligent-voice-authentication
+### 6. Launch SecureX-Assist
 ```bash
 # Option A: Full dashboard
 python main.py
-
-# Option B: Docker
-docker compose up
 ```
 
 ---
@@ -290,15 +286,13 @@ Multi-Modal Fusion: 1.25%  ← 58% reduction in error
 
 ## 🔬 Research Context
 
-This system is published as a conference paper at **ICASET-2026**. The research builds on:
+This research was accepted for publication at **ICASET 2026**. The research builds on:
 
 - **ECAPA-TDNN** (Desplanques et al., Interspeech 2020) — state-of-the-art speaker embeddings
 - **AASIST** (Jung et al., ICASSP 2022) — spectro-temporal graph attention for anti-spoofing
 - **ArcFace** (Deng et al.) — angular margin loss for robust face recognition
 - **Spoof-aware embedding spaces** (Liu et al., IEEE TASLP 2024)
 - **Continuous learning for deepfake detection** (Nguyen Le et al., 2024)
-
-> Full bibliography: see [`research/ICASET_2026_SecureX.pdf`](research/ICASET_2026_SecureX.pdf)
 
 ---
 
@@ -317,11 +311,11 @@ This system is published as a conference paper at **ICASET-2026**. The research 
 **Bhushan Prabhakar Jagtap**  
 B.E. Computer Engineering — Pillai HOC College of Engineering & Technology, Mumbai University  
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=flat-square&logo=linkedin)](https://www.linkedin.com/in/bhushan-jagtap-9100a5363/N)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=flat-square&logo=linkedin)](www.linkedin.com/in/bhushan-jagtap999)
 [![GitHub](https://img.shields.io/badge/GitHub-Follow-black?style=flat-square&logo=github)](https://github.com/jagtapbhushan254-alt)
 [![Email](https://img.shields.io/badge/Email-Contact-red?style=flat-square&logo=gmail)](mailto:jagtapbhushan254@gmail.com)
 
-**Co-authors:** Aayush Gunjal  
+**Co-author:** Aayush Gunjal  
 **Faculty Guide:** Prof. Shrutika Khobragade
 
 ---
@@ -333,25 +327,13 @@ If you use this work in your research, please cite:
 ```bibtex
 @inproceedings{jagtap2026securex,
   title     = {Voice Based Biometric Authentication and AI Assistant for Secure Desktop Operations},
-  author    = {Jagtap, Bhushan Prabhakar and Gunjal, Aayush Ajit and Jadhav and Khobragade, Shrutika},
+  author    = {Jagtap, Bhushan Prabhakar and Gunjal, Aayush Ajit and Khobragade, Shrutika},
   booktitle = {Proceedings of the International Conference on Advanced Science, Engineering and Technology (ICASET)},
   year      = {2026},
   institution = {Pillai HOC College of Engineering and Technology, Mumbai University}
 }
-```
-
----
-
-## 📜 License
-
-This project is licensed under the MIT License — see [`LICENSE`](LICENSE) for details.
-
-> ⚠️ Pretrained model weights (ECAPA-TDNN, ArcFace, AASIST) are subject to their respective licenses.  
-> This repository is for academic and research purposes.
-
----
-
+ ```
 <p align="center">
   <i>Built with ❤️ at Pillai HOC College of Engineering and Technology, Mumbai</i><br>
-  <i>Published at ICASET-2026</i>
+  <i>Accepted for publication at ICASET 2026</i>
 </p>
